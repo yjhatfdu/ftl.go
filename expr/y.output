@@ -1,0 +1,887 @@
+
+state 0
+	$accept: .input $end 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	input  goto 1
+	e  goto 2
+
+state 1
+	$accept:  input.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	input:  e.    (1)
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	OR  shift 14
+	AND  shift 13
+	NEQ  shift 24
+	GT  shift 19
+	LT  shift 21
+	GTE  shift 20
+	LTE  shift 22
+	EQ  shift 23
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 1 (src line 76)
+
+
+state 3
+	e:  INT.    (2)
+
+	.  reduce 2 (src line 78)
+
+
+state 4
+	e:  STR.    (3)
+
+	.  reduce 3 (src line 79)
+
+
+state 5
+	e:  RAWSTR.    (4)
+
+	.  reduce 4 (src line 80)
+
+
+state 6
+	e:  FLOAT.    (5)
+
+	.  reduce 5 (src line 81)
+
+
+state 7
+	e:  BOOL.    (6)
+
+	.  reduce 6 (src line 82)
+
+
+state 8
+	e:  ID.    (7)
+
+	.  reduce 7 (src line 83)
+
+
+state 9
+	e:  LBR.arr_cnt RBR 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 27
+	arr_cnt  goto 26
+
+state 10
+	e:  NOT.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 28
+
+state 11
+	e:  e DOT.ID 
+
+	ID  shift 29
+	.  error
+
+
+state 12
+	e:  e LBR.e RBR 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 30
+
+state 13
+	e:  e AND.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 31
+
+state 14
+	e:  e OR.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 32
+
+state 15
+	e:  e ADD.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 33
+
+state 16
+	e:  e MINUS.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 34
+
+state 17
+	e:  e DIV.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 35
+
+state 18
+	e:  e MUL.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 36
+
+state 19
+	e:  e GT.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 37
+
+state 20
+	e:  e GTE.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 38
+
+state 21
+	e:  e LT.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 39
+
+state 22
+	e:  e LTE.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 40
+
+state 23
+	e:  e EQ.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 41
+
+state 24
+	e:  e NEQ.e 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 42
+
+state 25
+	e:  e LP.arr_cnt RP 
+	e:  e LP.RP 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	RP  shift 44
+	LBR  shift 9
+	.  error
+
+	e  goto 27
+	arr_cnt  goto 43
+
+state 26
+	e:  LBR arr_cnt.RBR 
+
+	RBR  shift 45
+	.  error
+
+
+state 27
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+	arr_cnt:  e.    (26)
+	arr_cnt:  e.COMMA arr_cnt 
+
+	OR  shift 14
+	AND  shift 13
+	NEQ  shift 24
+	GT  shift 19
+	LT  shift 21
+	GTE  shift 20
+	LTE  shift 22
+	EQ  shift 23
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	COMMA  shift 46
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 26 (src line 105)
+
+
+state 28
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  NOT e.    (17)
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	NEQ  shift 24
+	GT  shift 19
+	LT  shift 21
+	GTE  shift 20
+	LTE  shift 22
+	EQ  shift 23
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 17 (src line 95)
+
+
+state 29
+	e:  e DOT ID.    (8)
+
+	.  reduce 8 (src line 84)
+
+
+state 30
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e LBR e.RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	OR  shift 14
+	AND  shift 13
+	NEQ  shift 24
+	GT  shift 19
+	LT  shift 21
+	GTE  shift 20
+	LTE  shift 22
+	EQ  shift 23
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	RBR  shift 47
+	.  error
+
+
+state 31
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e AND e.    (11)
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	NEQ  shift 24
+	GT  shift 19
+	LT  shift 21
+	GTE  shift 20
+	LTE  shift 22
+	EQ  shift 23
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 11 (src line 89)
+
+
+state 32
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e OR e.    (12)
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	AND  shift 13
+	NEQ  shift 24
+	GT  shift 19
+	LT  shift 21
+	GTE  shift 20
+	LTE  shift 22
+	EQ  shift 23
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 12 (src line 90)
+
+
+state 33
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e ADD e.    (13)
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 13 (src line 91)
+
+
+state 34
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e MINUS e.    (14)
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 14 (src line 92)
+
+
+state 35
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e DIV e.    (15)
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 15 (src line 93)
+
+
+state 36
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e MUL e.    (16)
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 16 (src line 94)
+
+
+state 37
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e GT e.    (18)
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 18 (src line 96)
+
+
+state 38
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e GTE e.    (19)
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 19 (src line 97)
+
+
+state 39
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e LT e.    (20)
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 20 (src line 98)
+
+
+state 40
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e LTE e.    (21)
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 21 (src line 99)
+
+
+state 41
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e EQ e.    (22)
+	e:  e.NEQ e 
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 22 (src line 100)
+
+
+state 42
+	e:  e.DOT ID 
+	e:  e.LBR e RBR 
+	e:  e.AND e 
+	e:  e.OR e 
+	e:  e.ADD e 
+	e:  e.MINUS e 
+	e:  e.DIV e 
+	e:  e.MUL e 
+	e:  e.GT e 
+	e:  e.GTE e 
+	e:  e.LT e 
+	e:  e.LTE e 
+	e:  e.EQ e 
+	e:  e.NEQ e 
+	e:  e NEQ e.    (23)
+	e:  e.LP arr_cnt RP 
+	e:  e.LP RP 
+
+	ADD  shift 15
+	MINUS  shift 16
+	MUL  shift 18
+	DIV  shift 17
+	LP  shift 25
+	DOT  shift 11
+	LBR  shift 12
+	.  reduce 23 (src line 101)
+
+
+state 43
+	e:  e LP arr_cnt.RP 
+
+	RP  shift 48
+	.  error
+
+
+state 44
+	e:  e LP RP.    (25)
+
+	.  reduce 25 (src line 103)
+
+
+state 45
+	e:  LBR arr_cnt RBR.    (10)
+
+	.  reduce 10 (src line 86)
+
+
+state 46
+	arr_cnt:  e COMMA.arr_cnt 
+
+	INT  shift 3
+	STR  shift 4
+	RAWSTR  shift 5
+	BOOL  shift 7
+	FLOAT  shift 6
+	NOT  shift 10
+	ID  shift 8
+	LBR  shift 9
+	.  error
+
+	e  goto 27
+	arr_cnt  goto 49
+
+state 47
+	e:  e LBR e RBR.    (9)
+
+	.  reduce 9 (src line 85)
+
+
+state 48
+	e:  e LP arr_cnt RP.    (24)
+
+	.  reduce 24 (src line 102)
+
+
+state 49
+	arr_cnt:  e COMMA arr_cnt.    (27)
+
+	.  reduce 27 (src line 109)
+
+
+51 terminals, 4 nonterminals
+28 grammar rules, 50/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+53 working sets used
+memory: parser 21/120000
+44 extra closures
+293 shift entries, 1 exceptions
+20 goto entries
+2 entries saved by goto default
+Optimizer space used: output 159/120000
+159 table entries, 30 zero
+maximum spread: 46, maximum offset: 46

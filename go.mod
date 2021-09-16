@@ -1,0 +1,1 @@
+module "ftl.go"

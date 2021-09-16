@@ -1,0 +1,285 @@
+
+state 0
+	$accept: .input $end 
+
+	TEXT  shift 4
+	IF  shift 6
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	input  goto 1
+	e_group  goto 2
+	e  goto 3
+
+state 1
+	$accept:  input.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	input:  e_group.    (1)
+	e_group:  e_group.e 
+
+	TEXT  shift 4
+	IF  shift 6
+	TMPL  shift 5
+	LIST  shift 7
+	.  reduce 1 (src line 24)
+
+	e  goto 8
+
+state 3
+	e_group:  e.    (10)
+
+	.  reduce 10 (src line 54)
+
+
+state 4
+	e:  TEXT.    (2)
+
+	.  reduce 2 (src line 26)
+
+
+state 5
+	e:  TMPL.    (3)
+
+	.  reduce 3 (src line 30)
+
+
+state 6
+	e:  IF.e_group END_IF 
+	e:  IF.e_group ELSE e_group END_IF 
+	e:  IF.e_group elseif_clauses END_IF 
+	e:  IF.e_group elseif_clauses ELSE e_group END_IF 
+
+	TEXT  shift 4
+	IF  shift 6
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	e_group  goto 9
+	e  goto 3
+
+state 7
+	e:  LIST.e_group END_LIST 
+	e:  LIST.e_group ELSE e_group END_LIST 
+
+	TEXT  shift 4
+	IF  shift 6
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	e_group  goto 10
+	e  goto 3
+
+state 8
+	e_group:  e_group e.    (11)
+
+	.  reduce 11 (src line 57)
+
+
+state 9
+	e:  IF e_group.END_IF 
+	e:  IF e_group.ELSE e_group END_IF 
+	e:  IF e_group.elseif_clauses END_IF 
+	e:  IF e_group.elseif_clauses ELSE e_group END_IF 
+	e_group:  e_group.e 
+
+	TEXT  shift 4
+	IF  shift 6
+	ELSE  shift 12
+	ELSE_IF  shift 14
+	END_IF  shift 11
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	e  goto 8
+	elseif_clauses  goto 13
+
+state 10
+	e:  LIST e_group.END_LIST 
+	e:  LIST e_group.ELSE e_group END_LIST 
+	e_group:  e_group.e 
+
+	TEXT  shift 4
+	IF  shift 6
+	ELSE  shift 16
+	TMPL  shift 5
+	LIST  shift 7
+	END_LIST  shift 15
+	.  error
+
+	e  goto 8
+
+state 11
+	e:  IF e_group END_IF.    (4)
+
+	.  reduce 4 (src line 33)
+
+
+state 12
+	e:  IF e_group ELSE.e_group END_IF 
+
+	TEXT  shift 4
+	IF  shift 6
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	e_group  goto 17
+	e  goto 3
+
+state 13
+	e:  IF e_group elseif_clauses.END_IF 
+	e:  IF e_group elseif_clauses.ELSE e_group END_IF 
+
+	ELSE  shift 19
+	END_IF  shift 18
+	.  error
+
+
+state 14
+	elseif_clauses:  ELSE_IF.e_group 
+	elseif_clauses:  ELSE_IF.e_group elseif_clauses 
+
+	TEXT  shift 4
+	IF  shift 6
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	e_group  goto 20
+	e  goto 3
+
+state 15
+	e:  LIST e_group END_LIST.    (8)
+
+	.  reduce 8 (src line 46)
+
+
+state 16
+	e:  LIST e_group ELSE.e_group END_LIST 
+
+	TEXT  shift 4
+	IF  shift 6
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	e_group  goto 21
+	e  goto 3
+
+state 17
+	e:  IF e_group ELSE e_group.END_IF 
+	e_group:  e_group.e 
+
+	TEXT  shift 4
+	IF  shift 6
+	END_IF  shift 22
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	e  goto 8
+
+state 18
+	e:  IF e_group elseif_clauses END_IF.    (6)
+
+	.  reduce 6 (src line 39)
+
+
+state 19
+	e:  IF e_group elseif_clauses ELSE.e_group END_IF 
+
+	TEXT  shift 4
+	IF  shift 6
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	e_group  goto 23
+	e  goto 3
+
+state 20
+	e_group:  e_group.e 
+	elseif_clauses:  ELSE_IF e_group.    (12)
+	elseif_clauses:  ELSE_IF e_group.elseif_clauses 
+
+	TEXT  shift 4
+	IF  shift 6
+	ELSE_IF  shift 14
+	TMPL  shift 5
+	LIST  shift 7
+	.  reduce 12 (src line 61)
+
+	e  goto 8
+	elseif_clauses  goto 24
+
+state 21
+	e:  LIST e_group ELSE e_group.END_LIST 
+	e_group:  e_group.e 
+
+	TEXT  shift 4
+	IF  shift 6
+	TMPL  shift 5
+	LIST  shift 7
+	END_LIST  shift 25
+	.  error
+
+	e  goto 8
+
+state 22
+	e:  IF e_group ELSE e_group END_IF.    (5)
+
+	.  reduce 5 (src line 36)
+
+
+state 23
+	e:  IF e_group elseif_clauses ELSE e_group.END_IF 
+	e_group:  e_group.e 
+
+	TEXT  shift 4
+	IF  shift 6
+	END_IF  shift 26
+	TMPL  shift 5
+	LIST  shift 7
+	.  error
+
+	e  goto 8
+
+state 24
+	elseif_clauses:  ELSE_IF e_group elseif_clauses.    (13)
+
+	.  reduce 13 (src line 65)
+
+
+state 25
+	e:  LIST e_group ELSE e_group END_LIST.    (9)
+
+	.  reduce 9 (src line 49)
+
+
+state 26
+	e:  IF e_group elseif_clauses ELSE e_group END_IF.    (7)
+
+	.  reduce 7 (src line 42)
+
+
+12 terminals, 5 nonterminals
+14 grammar rules, 27/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+54 working sets used
+memory: parser 19/120000
+21 extra closures
+67 shift entries, 1 exceptions
+18 goto entries
+6 entries saved by goto default
+Optimizer space used: output 82/120000
+82 table entries, 25 zero
+maximum spread: 12, maximum offset: 23
